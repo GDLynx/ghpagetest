@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+canvas {
+	height: 400px;
+	width: 400px;
+	background-color: black;
+}
+
+</style>
+<head>
+<title> Github GameOff
+</title>
+</head>
+<body>
+
+<canvas id = "GithubGame" width="400" height="400"></canvas>
+
+<script>
+
+	/*
+		To Do:
+		Draw progress rectangles
+		 
+	*/
+	
+// function init() { // This is to deal with 'unexpected script ending' error
+	
+	var canvas = document.getElementById("GithubGame");
+	var ctx = canvas.getContext("2d");
+	
+	var key_one = key_two = key_three = key_four = key_five = false;
+		
+	var one_status = 0;
+	
+	var two_status = 0;
+	
+	var three_status = 0;
+	
+	var four_status = 0;
+	
+	var five_status = 0;
+	
+	var inc_one = false;
+	
+	var inc_two = false;
+	
+	var inc_three = false;
+	
+	var inc_four = false;
+	
+	var inc_five = false;
+	
+	var money;
+	money = 0;
+	
+	// Automation (bars increase automatically) is yet to be added
+	var one_automated=two_automated=three_automated=four_automated=five_automated = false;	
+	
+	function top() { // This displays the name of the game & player's in-game money
+		
+		// Outline
+		ctx.beginPath();
+		ctx.lineWidth = 8;
+		ctx.strokeRect(60, 0, 300, 54);
+		ctx.strokeStyle = "white";
+		ctx.closePath();
+		
+		ctx.beginPath();
+		ctx.lineWidth = 8;
+		ctx.strokeRect(260, 0, 100, 54);
+		ctx.strokeStyle = "white";
+		ctx.closePath();
+		
+	
+		// Display Money
+		ctx.fillStyle = "white";
+		ctx.font = "30px Ariel";
+		ctx.fillText("$" + money, 264, 40); 
+		
+		// Game's Title
+		ctx.fillStyle = "white";
+		ctx.font = "34px Ariel";
+		ctx.fillText("Cydle", 80, 38); // Cybercrime-Idle game
+		
+		
+		/*
+		if (money > 10000) {
+			ctx.font = 20px; 
+			// Player has reached over a "million"
+		}
+		*/
+	}
+	
+	function getInput() {
+	
+		/*
+		key_one = inc_one;
+		key_two = inc_two;
+		key_three = inc_three;
+		key_four = inc_four;
+		key_five = inc_five;
+		*/
+		
+		if (key_one) {
+			inc_one = true;
+		} 
+		
+		if (key_two) {
+			inc_two = true;
+		} 
+		
+		if (key_three) {
+			inc_three = true;
+		} 
+		
+		if (key_four) {
+			inc_four = true;
+		} 
+		
+		if (key_five) {
+			inc_five = true;
+		} 
+	}
+	
+	function one() { // Email 
+	/* For input I could use buttons however for quickness I may just use keys;1-5 */
+		
+		// Foreground
+		ctx.beginPath();
+		ctx.rect(80, 62, one_status, 50);
+		ctx.fillStyle = "green";
+		ctx.fill();
+		ctx.closePath();
+		
+		// Background
+		ctx.beginPath();
+		ctx.lineWidth = 4;
+		ctx.strokeRect(80, 60, 250, 54);
+		ctx.strokeStyle = "white";
+		ctx.closePath();
+		
+		// Key Display
+		ctx.beginPath();
+		ctx.strokeRect(40, 64, 40, 50);
+		ctx.strokeStyle = "white";
+		ctx.closePath();
+		// Key Display Text
+		ctx.fillStyle = "white";
+		ctx.font = "40px Ariel";
+		ctx.fillText("1", 50, 102); 
+		
+		// Mame of Activity
+		ctx.fillStyle = "white";
+		ctx.font = "20px Ariel";
+		ctx.fillText("SCAM VIA EMAIL", 90, 90);
+		
+		if (inc_one || one_automated) one_status+=2;		
+		
+		if (one_status > 250) {
+			money += 2;
+			one_status = 0;
+			inc_one = false;
+			key_one = false;
+		}
+	}
+	
+	function two() { // Credit Card
+		
+			
+		// Foreground
+		ctx.beginPath();
+		ctx.rect(80, 120, two_status, 50);
+		ctx.fillStyle = "green";
+		ctx.fill();
+		ctx.closePath();
+		
+		// Background
+		ctx.beginPath();
+		ctx.lineWidth = 4;
+		ctx.strokeRect(80, 120, 250, 54);
+		ctx.strokeStyle = "white";
+		ctx.closePath();
+
+		// Key Display
+		ctx.beginPath();
+		ctx.strokeRect(40, 124, 40, 50);
+		ctx.strokeStyle = "white";
+		ctx.closePath();
+		// Key Display Text
+		ctx.fillStyle = "white";
+		ctx.font = "40px Ariel";
+		ctx.fillText("2", 50, 162); 
+			
+		// Mame of Activity
+		ctx.fillStyle = "white";
+		ctx.font = "20px Ariel";
+		ctx.fillText("SKIM CREDIT CARD", 90, 150);
+		
+		
+		if (inc_two || two_automated) two_status+=0.8;		
+		
+		if (two_status > 250) {
+			money += 10;
+			two_status = 0;
+			inc_two = false;
+			key_two = false;
+		}
+	}
+	
+	function three() { // Business
+	
+		// Foreground
+		ctx.beginPath();
+		ctx.rect(80, 180, three_status, 50);
+		ctx.fillStyle = "green";
+		ctx.fill();
+		ctx.closePath();
+		
+		// Background
+		ctx.beginPath();
+		ctx.lineWidth = 4;
+		ctx.strokeRect(80, 180, 250, 54);
+		ctx.strokeStyle = "white";
+		ctx.closePath();
+		
+		// Key Display
+		ctx.beginPath();
+		ctx.strokeRect(40, 184, 40, 50);
+		ctx.strokeStyle = "white";
+		ctx.closePath();
+		// Key Display Text
+		ctx.fillStyle = "white";
+		ctx.font = "40px Ariel";
+		ctx.fillText("3", 50, 220); 
+		
+		// Mame of Activity
+		ctx.fillStyle = "white";
+		ctx.font = "20px Ariel";
+		ctx.fillText("HACK BUSINESS", 90, 210);
+		
+		
+		if (inc_three || three_automated) three_status+=0.6;		
+		
+		if (three_status > 250) {
+			money += 30;
+			three_status = 0;
+			inc_three = false;
+			key_three = false;
+		}
+	}
+	
+	function four() { // Bank
+	
+		// Foreground
+		ctx.beginPath();
+		ctx.rect(80, 240, four_status, 50);
+		ctx.fillStyle = "green";
+		ctx.fill();
+		ctx.closePath();
+		
+		// Background
+		ctx.beginPath();
+		ctx.lineWidth = 4;
+		ctx.strokeRect(80, 240, 250, 54);
+		ctx.strokeStyle = "white";
+		ctx.closePath();
+		
+		// Key Display
+		ctx.beginPath();
+		ctx.strokeRect(40, 244, 40, 50);
+		ctx.strokeStyle = "white";
+		ctx.closePath();
+		// Key Display Text
+		ctx.fillStyle = "white";
+		ctx.font = "40px Ariel";
+		ctx.fillText("4", 50, 278); 
+		
+			
+		// Mame of Activity
+		ctx.fillStyle = "white";
+		ctx.font = "20px Ariel";
+		ctx.fillText("HACK BANK", 90, 270);
+		
+		
+		if (inc_four || four_automated) four_status+=0.4;		
+		
+		if (four_status > 250) {
+			money += 100;
+			four_status = 0;
+			inc_four = false;
+			key_four = false;
+		}
+	}
+	
+	function five() { // Government
+		
+		// Foreground
+		ctx.beginPath();
+		ctx.rect(80, 300, five_status, 50);
+		ctx.fillStyle = "green";
+		ctx.fill();
+		ctx.closePath();
+		
+		// Background
+		ctx.beginPath();
+		ctx.lineWidth = 4;
+		ctx.strokeRect(80, 300, 250, 54);
+		ctx.strokeStyle = "white";
+		ctx.closePath();
+	
+		// Key Display
+		ctx.beginPath();
+		ctx.strokeRect(40, 304, 40, 50);
+		ctx.strokeStyle = "white";
+		ctx.closePath();
+		// Key Display Text
+		ctx.fillStyle = "white";
+		ctx.font = "40px Ariel";
+		ctx.fillText("5", 50, 338); 
+			
+		// Mame of Activity
+		ctx.fillStyle = "white";
+		ctx.font = "20px Ariel";
+		ctx.fillText("HACK GOVERNMENT", 90, 330);
+		
+		
+		if (inc_five || five_automated) five_status+=0.2;		
+		
+		if (five_status > 250) {
+			money += 200;
+			five_status = 0;
+			inc_five = false;
+			key_five = false;
+		}
+	}
+	
+	function main() {
+		ctx.clearRect(0, 0, 400, 400);
+		one();
+		two();
+		three();
+		four();
+		five();
+		getInput();
+		top();
+	}
+	
+	setInterval(main, 10);
+
+	document.addEventListener("keydown", keyDownHandler, false);
+	document.addEventListener("keyup", keyUpHandler, false);
+
+	function keyDownHandler(e) {
+		if (e.keyCode == 49) { // Left arrow key (Option1)
+			key_one = true;
+		}
+		else if (e.keyCode == 50) { // Right arrow key (Option2)
+			key_two = true;
+		}
+		else if (e.keyCode == 51) { // Left arrow key (Option1)
+			key_three = true;
+		}
+		else if (e.keyCode == 52) { // Right arrow key (Option2)
+			key_four = true;
+		}
+		else if (e.keyCode == 53) { // Left arrow key (Option1)
+			key_five = true;
+		}
+	}
+
+	function keyUpHandler(e) {
+		if (e.keyCode == 49) { // Left arrow key (Option1)
+			// key_one = false;
+		}
+		else if (e.keyCode == 50) { // Right arrow key (Option2)
+			// key_two = false;
+		}
+		else if (e.keyCode == 51) { // Left arrow key (Option1)
+			// key_three = false;
+		}
+		else if (e.keyCode == 52) { // Right arrow key (Option2)
+			// key_four = false;
+		}
+		else if (e.keyCode == 53) { // Left arrow key (Option1)
+			// key_five = false;
+		}
+	}
+/* }
+
+init();
+*/
+	
+</script>
+
+</body>
+</html>
